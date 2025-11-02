@@ -1,6 +1,6 @@
 # 네이버 블로그 자동화 글쓰기 프로그램
 
-Selenium과 Google Gemini AI를 활용한 네이버 블로그 자동 포스팅 시스템입니다.
+Selenium과 Perplexity AI를 활용한 네이버 블로그 자동 포스팅 시스템입니다.
 
 ## 주요 기능
 
@@ -12,7 +12,7 @@ Selenium과 Google Gemini AI를 활용한 네이버 블로그 자동 포스팅 �
 - 인간적인 타이핑 모방 (ActionChains 활용)
 
 ### 2. AI 콘텐츠 생성
-- Google Gemini API를 활용한 자동 콘텐츠 생성
+- Perplexity API를 활용한 자동 콘텐츠 생성
 - 키워드 기반 제목 및 본문 생성
 - 엑셀 파일 대량 처리 지원
 - SEO 최적화된 콘텐츠
@@ -43,16 +43,16 @@ cp .env.example .env
 NAVER_ID=your_naver_id
 NAVER_PW=your_naver_password
 
-# Google Gemini API (선택 사항 - AI 콘텐츠 생성 시 필요)
-GEMINI_API_KEY=your_gemini_api_key
+# Perplexity API (선택 사항 - AI 콘텐츠 생성 시 필요)
+PERPLEXITY_API_KEY=your_perplexity_api_key
 ```
 
-### 4. Google Gemini API 키 발급 (선택 사항)
-AI 콘텐츠 생성 기능을 사용하려면 Google Gemini API 키가 필요합니다.
+### 4. Perplexity API 키 발급 (선택 사항)
+AI 콘텐츠 생성 기능을 사용하려면 Perplexity API 키가 필요합니다.
 
-1. [Google AI Studio](https://makersuite.google.com/app/apikey) 접속
+1. [Perplexity AI](https://www.perplexity.ai/settings/api) 접속
 2. API 키 생성
-3. `.env` 파일에 `GEMINI_API_KEY` 설정
+3. `.env` 파일에 `PERPLEXITY_API_KEY` 설정
 
 ## 사용 방법
 
@@ -113,7 +113,7 @@ AutoBlog/
 - **Selenium**: 브라우저 자동화
 - **pyperclip**: 클립보드 복사/붙여넣기 (보안 우회)
 - **ActionChains**: 자연스러운 타이핑 모방
-- **Google Gemini AI**: 콘텐츠 자동 생성
+- **Perplexity AI**: 콘텐츠 자동 생성
 - **openpyxl**: 엑셀 파일 처리
 
 ## 주의사항
@@ -133,7 +133,7 @@ AutoBlog/
    - Git에 업로드되지 않도록 `.gitignore`에 포함되어 있습니다
 
 4. **API 사용량 제한**
-   - Google Gemini API는 무료 사용량 제한이 있습니다
+   - Perplexity API는 무료 사용량 제한이 있습니다
    - 대량 생성 시 요금이 발생할 수 있으니 확인하세요
 
 5. **콘텐츠 품질**
@@ -156,7 +156,7 @@ AutoBlog/
 - 셀렉터(CSS Selector)를 업데이트해야 할 수 있습니다
 
 ### AI 콘텐츠 생성 오류
-- `GEMINI_API_KEY`가 올바르게 설정되었는지 확인하세요
+- `PERPLEXITY_API_KEY`가 올바르게 설정되었는지 확인하세요
 - API 사용량 제한을 확인하세요
 
 ### 브라우저 드라이버 오류

@@ -1,6 +1,6 @@
 """
 AI 콘텐츠 생성 + 네이버 블로그 자동화 통합 프로그램
-Google Gemini API로 콘텐츠를 생성하고 자동으로 블로그에 포스팅
+Perplexity API로 콘텐츠를 생성하고 자동으로 블로그에 포스팅
 """
 
 import os
@@ -78,7 +78,7 @@ def main():
 
         except ValueError as e:
             print(f"\n오류: {str(e)}")
-            print("GEMINI_API_KEY를 .env 파일에 설정해주세요.")
+            print("PERPLEXITY_API_KEY를 .env 파일에 설정해주세요.")
             return
 
     elif mode == '3':
@@ -127,7 +127,7 @@ def main():
 
         except ValueError as e:
             print(f"\n오류: {str(e)}")
-            print("GEMINI_API_KEY를 .env 파일에 설정해주세요.")
+            print("PERPLEXITY_API_KEY를 .env 파일에 설정해주세요.")
             return
 
     else:

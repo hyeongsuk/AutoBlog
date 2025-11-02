@@ -1,12 +1,12 @@
 """
 AI 콘텐츠 생성 모듈
-Google Gemini API를 활용한 블로그 포스트 자동 생성
+Perplexity API를 활용한 블로그 포스트 자동 생성
 """
 
 import os
 import time
+import requests
 from dotenv import load_dotenv
-import google.generativeai as genai
 from openpyxl import load_workbook
 
 # 환경 변수 로드
@@ -16,14 +16,17 @@ load_dotenv()
 class AIContentGenerator:
     def __init__(self):
         """AI 콘텐츠 생성기 초기화"""
-        self.api_key = os.getenv('GEMINI_API_KEY')
+        self.api_key = os.getenv('PERPLEXITY_API_KEY')
 
         if not self.api_key:
-            raise ValueError("환경 변수에 GEMINI_API_KEY를 설정해주세요.")
+            raise ValueError("환경 변수에 PERPLEXITY_API_KEY를 설정해주세요.")
 
-        # Gemini API 설정
-        genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel('gemini-pro')
+        # Perplexity API 설정
+        self.api_url = "https://api.perplexity.ai/chat/completions"
+        self.headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
 
     def generate_blog_post(self, keyword, tone="친근하고 정보적인", length="중간"):
         """
@@ -72,11 +75,29 @@ class AIContentGenerator:
 """
 
         try:
-            # API 호출
-            response = self.model.generate_content(prompt)
+            # Perplexity API 호출
+            payload = {
+                "model": "llama-3.1-sonar-small-128k-online",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "당신은 전문 블로그 작가입니다. 네이버 블로그에 최적화된 콘텐츠를 작성합니다."
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                "temperature": 0.7,
+                "max_tokens": 2000
+            }
+
+            response = requests.post(self.api_url, headers=self.headers, json=payload)
+            response.raise_for_status()
 
             # 응답 파싱
-            generated_text = response.text
+            result = response.json()
+            generated_text = result['choices'][0]['message']['content']
 
             # 제목과 본문 분리
             title = ""
@@ -241,7 +262,7 @@ def main():
 
     except ValueError as e:
         print(f"\n오류: {str(e)}")
-        print("GEMINI_API_KEY를 .env 파일에 설정해주세요.")
+        print("PERPLEXITY_API_KEY를 .env 파일에 설정해주세요.")
 
 
 if __name__ == "__main__":
